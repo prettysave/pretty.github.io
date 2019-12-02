@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="如何判断对象可以回收1.引用计数法给每一个对象添加一个引用计数器，每当有一个地方引用它时，计数器值加1；每当有一个地方不再引用它时，计数器值减1，这样只要计数器的值不为0，就说明还有地方引用它，它就不是无用的对象。 Tips: （1）当两个对象互相调用的时候，它们的引用计数都是1，都无法回收； （2）当前的主流虚拟机都没有采用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JVM（2）- 垃圾回收算法">
+<meta property="og:url" content="http://yoursite.com/2019/10/10/JVM2/index.html">
+<meta property="og:site_name" content="嗯哼">
+<meta property="og:description" content="如何判断对象可以回收1.引用计数法给每一个对象添加一个引用计数器，每当有一个地方引用它时，计数器值加1；每当有一个地方不再引用它时，计数器值减1，这样只要计数器的值不为0，就说明还有地方引用它，它就不是无用的对象。 Tips: （1）当两个对象互相调用的时候，它们的引用计数都是1，都无法回收； （2）当前的主流虚拟机都没有采用">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-12-02T07:05:37.193Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JVM（2）- 垃圾回收算法">
+<meta name="twitter:description" content="如何判断对象可以回收1.引用计数法给每一个对象添加一个引用计数器，每当有一个地方引用它时，计数器值加1；每当有一个地方不再引用它时，计数器值减1，这样只要计数器的值不为0，就说明还有地方引用它，它就不是无用的对象。 Tips: （1）当两个对象互相调用的时候，它们的引用计数都是1，都无法回收； （2）当前的主流虚拟机都没有采用">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/10/10/JVM2/">
+
+
+
+
+
+  <title>JVM（2）- 垃圾回收算法 | 嗯哼</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+<a href="https://github.com/prettysave" class="github-corner" aria-label="View source on GitHub">
+  <svg width="80" height="80" viewbox="0 0 250 250" style="fill:#70B7FD; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true">
+    <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/>
+    <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/>
+  </svg>
+</a>
+
+<style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+   
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">嗯哼</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/10/JVM2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="嗯哼">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="嗯哼">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JVM（2）- 垃圾回收算法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-10T17:03:24+08:00">
+                2019-10-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="如何判断对象可以回收"><a href="#如何判断对象可以回收" class="headerlink" title="如何判断对象可以回收"></a>如何判断对象可以回收</h2><h3 id="1-引用计数法"><a href="#1-引用计数法" class="headerlink" title="1.引用计数法"></a>1.引用计数法</h3><p>给每一个对象添加一个引用计数器，每当有一个地方引用它时，计数器值加1；每当有一个地方不再引用它时，计数器值减1，这样只要计数器的值不为0，就说明还有地方引用它，它就不是无用的对象。</p>
+<p><strong>Tips:</strong></p>
+<p><strong>（1）当两个对象互相调用的时候，它们的引用计数都是1，都无法回收；</strong></p>
+<p><strong>（2）当前的主流虚拟机都没有采用</strong></p>
+<a id="more"></a>
+
+<h3 id="2-可达性分析算法"><a href="#2-可达性分析算法" class="headerlink" title="2.可达性分析算法"></a>2.可达性分析算法</h3><p>当一个对象到GC Roots没有任何引用链相连（GC Roots到这个对象不可达）时，就说明此对象是不可用的，是死对象。</p>
+<p><strong>GC ROOTS:</strong></p>
+<p>(1) 虚拟机栈中本地变量表中引用的对象</p>
+<p>(2) 方法区中静态属性引用的对象</p>
+<p>(3) 方法区中常量引用的对象</p>
+<p>(4) 本地方法栈中JNI（Native方法）引用的对象</p>
+<h3 id="3-方法区回收"><a href="#3-方法区回收" class="headerlink" title="3.方法区回收"></a>3.方法区回收</h3><p>方法区中主要回收的是废弃的常量和无用的类。 </p>
+<p>（1）判断常量是否废弃可以判断是否有地方引用这个常量，如果没有引用则为废弃的常量。 </p>
+<p>（2） 判断类是否废弃需要同时满足如下条件：</p>
+<ul>
+<li>该类所有的实例已经被回收（堆中不存在任何该类的实例）</li>
+<li>加载该类的ClassLoader已经被回收</li>
+<li>该类对应的java.lang.Class对象在任何地方没有被引用（无法通过反射访问该类的方法）</li>
+</ul>
+<h2 id="垃圾回收算法"><a href="#垃圾回收算法" class="headerlink" title="垃圾回收算法"></a>垃圾回收算法</h2><p>（1）标记-清除算法：分为标记和清除两个阶段，首先标记出所有需要回收的对象，标记完成后统一回收所有被标记的对象，如下图。</p>
+<p>缺点：标记和清除两个过程效率都不高；标记清除之后会产生大量不连续的内存碎片。 </p>
+<p>（2）复制算法：把内存分为大小相等的两块，每次存储只用其中一块，当这一块用完了，就把存活的对象全部复制到另一块上，同时把使用过的这块内存空间全部清理掉，往复循环。</p>
+<p>缺点：实际可使用的内存空间缩小为原来的一半，比较适合对象生存周期短的区域。</p>
+<p>（3）标记-整理算法：先对可用的对象进行标记，然后所有被标记的对象向一段移动，最后清除可用对象边界以外的内存。</p>
+<h3 id="垃圾收集器"><a href="#垃圾收集器" class="headerlink" title="垃圾收集器"></a>垃圾收集器</h3><p>新生代收集器：Serial、ParNew、Parallel Scavenge</p>
+<p>老年代收集器：Serial Old、CMS、Parallel Old</p>
+<p>堆内存垃圾收集器：G1 </p>
+<h4 id="（1）Serial-收集器"><a href="#（1）Serial-收集器" class="headerlink" title="（1）Serial 收集器"></a>（1）Serial 收集器</h4><p>​        Serial是一款用于新生代的单线程收集器，采用复制算法进行垃圾收集。Serial进行垃圾收集时，不仅只用一条线程执行垃圾收集工作，它在收集的同时，所有的用户线程必须暂停（Stop The World）。</p>
+<p><strong>适用场景</strong>：Client模式（桌面应用）；单核服务器。可以用-XX:+UserSerialGC来选择Serial作为新生代收集器。</p>
+<h4 id="（2）ParNew-收集器"><a href="#（2）ParNew-收集器" class="headerlink" title="（2）ParNew 收集器"></a>（2）ParNew 收集器</h4><p>​        ParNew就是一个Serial的多线程版本，其它与Serial并无区别。ParNew在单核CPU环境并不会比Serial收集器达到更好的效果，它默认开启的收集线程数和CPU数量一致，可以通过-XX:ParallelGCThreads来设置垃圾收集的线程数。 </p>
+<p><strong>适用场景</strong>：多核服务器；与CMS收集器搭配使用。当使用-XX:+UserConcMarkSweepGC来选择CMS作为老年代收集器时，新生代收集器默认就是ParNew，也可以用-XX:+UseParNewGC来指定使用ParNew作为新生代收集器。</p>
+<h4 id="（3）Parallel-Scavenge-收集器"><a href="#（3）Parallel-Scavenge-收集器" class="headerlink" title="（3）Parallel Scavenge 收集器"></a>（3）Parallel Scavenge 收集器</h4><p>​        Parallel Scavenge是一款用于新生代的多线程收集器，与ParNew的不同之处是，ParNew的目标是尽可能缩短垃圾收集时用户线程的停顿时间，Parallel Scavenge的目标是达到一个可控制的吞吐量。</p>
+<p>​        可以通过-XX:MaxGCPauseMillis来设置收集器尽可能在多长时间内完成内存回收，可以通过-XX:GCTimeRatio来精确控制吞吐量。</p>
+<p><strong>适用场景</strong>：注重吞吐量，高效利用CPU，需要高效运算且不需要太多交互。可以使用-XX:+UseParallelGC来选择Parallel Scavenge作为新生代收集器，jdk7、jdk8默认使用Parallel Scavenge作为新生代收集器。</p>
+<h4 id="（4）Serial-Old收集器"><a href="#（4）Serial-Old收集器" class="headerlink" title="（4）Serial Old收集器"></a>（4）Serial Old收集器</h4><p>​        Serial Old收集器是Serial的老年代版本，同样是一个单线程收集器，采用标记-整理算法。</p>
+<p><strong>适用场景</strong>：Client模式（桌面应用）；单核服务器；与Parallel Scavenge收集器搭配；作为CMS收集器的后备预案。</p>
+<h4 id="（5）CMS-Concurrent-Mark-Sweep-收集器"><a href="#（5）CMS-Concurrent-Mark-Sweep-收集器" class="headerlink" title="（5）CMS(Concurrent Mark Sweep) 收集器"></a>（5）CMS(Concurrent Mark Sweep) 收集器</h4><p>​        CMS收集器是一种以最短回收停顿时间为目标的收集器，以“最短用户线程停顿时间”著称。整个垃圾收集过程分为4个步骤：</p>
+<p> ① 初始标记：标记一下GC Roots能直接关联到的对象，速度较快</p>
+<p> ② 并发标记：进行GC Roots Tracing，标记出全部的垃圾对象，耗时较长 </p>
+<p> ③ 重新标记：修正并发标记阶段引用户程序继续运行而导致变化的对象的标记记录，耗时较短  </p>
+<p>④ 并发清除：用标记-清除算法清除垃圾对象，耗时较长</p>
+<p><strong>Tips</strong>:整个过程耗时最长的并发标记和并发清除都是和用户线程一起工作，所以从总体上来说，CMS收集器垃圾收集可以看做是和用户线程并发执行的。 </p>
+<p>CMS收集器也存在一些缺点：</p>
+<ul>
+<li>对CPU资源敏感：默认分配的垃圾收集线程数为（CPU数+3）/4，随着CPU数量下降，占用CPU资源越多，吞吐量越小</li>
+<li>无法处理浮动垃圾：在并发清理阶段，由于用户线程还在运行，还会不断产生新的垃圾，CMS收集器无法在当次收集中清除这部分垃圾。同时由于在垃圾收集阶段用户线程也在并发执行，CMS收集器不能像其他收集器那样等老年代被填满时再进行收集，需要预留一部分空间提供用户线程运行使用。当CMS运行时，预留的内存空间无法满足用户线程的需要，就会出现“Concurrent Mode Failure”的错误，这时将会启动后备预案，临时用Serial Old来重新进行老年代的垃圾收集。</li>
+<li>因为CMS是基于标记-清除算法，所以垃圾回收后会产生空间碎片，可以通过-XX:UserCMSCompactAtFullCollection开启碎片整理（默认开启），在CMS进行Full GC之前，会进行内存碎片的整理。还可以用-XX:CMSFullGCsBeforeCompaction设置执行多少次不压缩（不进行碎片整理）的Full GC之后，跟着来一次带压缩（碎片整理）的Full GC。  适用场景：重视服务器响应速度，要求系统停顿时间最短。可以使用-XX:+UserConMarkSweepGC来选择CMS作为老年代收集器。</li>
+</ul>
+<h4 id="（6）Parallel-Old-收集器"><a href="#（6）Parallel-Old-收集器" class="headerlink" title="（6）Parallel Old 收集器"></a>（6）Parallel Old 收集器</h4><p>​        Parallel Old收集器是Parallel Scavenge的老年代版本，是一个多线程收集器，采用标记-整理算法。可以与Parallel Scavenge收集器搭配，可以充分利用多核CPU的计算能力。</p>
+<p> <strong>适用场景</strong>：与Parallel Scavenge收集器搭配使用；注重吞吐量。jdk7、jdk8默认使用该收集器作为老年代收集器，使用 -XX:+UseParallelOldGC来指定使用Paralle Old收集器。</p>
+<h4 id="（7）G1-收集器"><a href="#（7）G1-收集器" class="headerlink" title="（7）G1 收集器"></a>（7）G1 收集器</h4><p>​        G1 收集器是jdk1.7才正式引用的商用收集器，现在已经成为jdk9默认的收集器。前面几款收集器收集的范围都是新生代或者老年代，G1进行垃圾收集的范围是整个堆内存，它采用“化整为零”的思路，把整个堆内存划分为多个大小相等的独立区域（Region），在G1收集器中还保留着新生代和老年代的概念，它们分别都是一部分Region。</p>
+<p>​        每一个方块就是一个区域，每个区域可能是Eden、Survivor、老年代，每种区域的数量也不一定。JVM启动时会自动设置每个区域的大小（1M~32M，必须是2的次幂），最多可以设置2048个区域（即支持的最大堆内存为32M*2048=64G），假如设置-Xmx8g -Xms8g，则每个区域大小为8g/2048=4M。</p>
+<p>​        为了在GC Roots Tracing的时候避免扫描全堆，在每个Region中，都有一个Remembered Set来实时记录该区域内的引用类型数据与其他区域数据的引用关系（在前面的几款分代收集中，新生代、老年代中也有一个Remembered Set来实时记录与其他区域的引用关系），在标记时直接参考这些引用关系就可以知道这些对象是否应该被清除，而不用扫描全堆的数据。</p>
+<p>​        G1收集器可以“建立可预测的停顿时间模型”，它维护了一个列表用于记录每个Region回收的价值大小（回收后获得的空间大小以及回收所需时间的经验值），这样可以保证G1收集器在有限的时间内可以获得最大的回收效率。</p>
+<p><strong>G1收集步骤</strong>：</p>
+<p>① 初始标记：标记出GC Roots直接关联的对象，这个阶段速度较快，需要停止用户线程，单线程执行  </p>
+<p>② 并发标记：从GC Root开始对堆中的对象进行可达新分析，找出存活对象，这个阶段耗时较长，但可以和用户线程并发执行  </p>
+<p>③ 最终标记：修正在并发标记阶段引用户程序执行而产生变动的标记记录  </p>
+<p>④ 筛选回收：筛选回收阶段会对各个Region的回收价值和成本进行排序，根据用户所期望的GC停顿时间来指定回收计划（用最少的时间来回收包含垃圾最多的区域，这就是Garbage First的由来——第一时间清理垃圾最多的区块），这里为了提高回收效率，并没有采用和用户线程并发执行的方式，而是停顿用户线程。</p>
+<p><strong>适用场景</strong>：要求尽可能可控GC停顿时间；内存占用较大的应用。可以用-XX:+UseG1GC使用G1收集器，jdk9默认使用G1收集器。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------　　　　本文结束　<i class="fa fa-heart"></i>　感谢您的阅读　　　　-------------</div>
+    
+</div>
+      
+    </div>
+    
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/09/JVM1/" rel="next" title="JVM（1）- JVM内存区域
+">
+                <i class="fa fa-chevron-left"></i> JVM（1）- JVM内存区域
+
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">嗯哼</p>
+              <p class="site-description motion-element" itemprop="description">我想和你谈谈</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/prettysave" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何判断对象可以回收"><span class="nav-number">1.</span> <span class="nav-text">如何判断对象可以回收</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-引用计数法"><span class="nav-number">1.1.</span> <span class="nav-text">1.引用计数法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-可达性分析算法"><span class="nav-number">1.2.</span> <span class="nav-text">2.可达性分析算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-方法区回收"><span class="nav-number">1.3.</span> <span class="nav-text">3.方法区回收</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#垃圾回收算法"><span class="nav-number">2.</span> <span class="nav-text">垃圾回收算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#垃圾收集器"><span class="nav-number">2.1.</span> <span class="nav-text">垃圾收集器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）Serial-收集器"><span class="nav-number">2.1.1.</span> <span class="nav-text">（1）Serial 收集器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）ParNew-收集器"><span class="nav-number">2.1.2.</span> <span class="nav-text">（2）ParNew 收集器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（3）Parallel-Scavenge-收集器"><span class="nav-number">2.1.3.</span> <span class="nav-text">（3）Parallel Scavenge 收集器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（4）Serial-Old收集器"><span class="nav-number">2.1.4.</span> <span class="nav-text">（4）Serial Old收集器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（5）CMS-Concurrent-Mark-Sweep-收集器"><span class="nav-number">2.1.5.</span> <span class="nav-text">（5）CMS(Concurrent Mark Sweep) 收集器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（6）Parallel-Old-收集器"><span class="nav-number">2.1.6.</span> <span class="nav-text">（6）Parallel Old 收集器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（7）G1-收集器"><span class="nav-number">2.1.7.</span> <span class="nav-text">（7）G1 收集器</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">嗯哼</span>
+
+  
+</div>
+
+<!-- 隐藏网页底部 powered By Hexo
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+-->
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

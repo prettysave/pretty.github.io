@@ -79,16 +79,19 @@
 
 
 
-<meta name="description" content="我想和你谈谈">
-<meta property="og:type" content="website">
-<meta property="og:title" content="嗯哼">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="线程共享内存：1.堆内存2.方法区 线程隔离内存：1.栈内存2.程序计数器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JVM（1）- JVM内存区域
+">
+<meta property="og:url" content="http://yoursite.com/2019/10/09/JVM1/index.html">
 <meta property="og:site_name" content="嗯哼">
-<meta property="og:description" content="我想和你谈谈">
+<meta property="og:description" content="线程共享内存：1.堆内存2.方法区 线程隔离内存：1.栈内存2.程序计数器">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-12-02T07:05:37.914Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="嗯哼">
-<meta name="twitter:description" content="我想和你谈谈">
+<meta name="twitter:title" content="JVM（1）- JVM内存区域
+">
+<meta name="twitter:description" content="线程共享内存：1.堆内存2.方法区 线程隔离内存：1.栈内存2.程序计数器">
 
 
 
@@ -118,13 +121,14 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/">
+  <link rel="canonical" href="http://yoursite.com/2019/10/09/JVM1/">
 
 
 
 
 
-  <title>嗯哼</title>
+  <title>JVM（1）- JVM内存区域
+ | 嗯哼</title>
   
 
 
@@ -143,8 +147,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
 <a href="https://github.com/prettysave" class="github-corner" aria-label="View source on GitHub">
@@ -226,140 +229,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/10/JVM2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="嗯哼">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="嗯哼">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/10/10/JVM2/" itemprop="url">JVM（2）- 垃圾回收算法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-10T17:03:24+08:00">
-                2019-10-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="如何判断对象可以回收"><a href="#如何判断对象可以回收" class="headerlink" title="如何判断对象可以回收"></a>如何判断对象可以回收</h2><h3 id="1-引用计数法"><a href="#1-引用计数法" class="headerlink" title="1.引用计数法"></a>1.引用计数法</h3><p>给每一个对象添加一个引用计数器，每当有一个地方引用它时，计数器值加1；每当有一个地方不再引用它时，计数器值减1，这样只要计数器的值不为0，就说明还有地方引用它，它就不是无用的对象。</p>
-<p><strong>Tips:</strong></p>
-<p><strong>（1）当两个对象互相调用的时候，它们的引用计数都是1，都无法回收；</strong></p>
-<p><strong>（2）当前的主流虚拟机都没有采用</strong></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/10/10/JVM2/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-    
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
 
   
 
@@ -389,10 +261,8 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/10/09/JVM1/" itemprop="url">JVM（1）- JVM内存区域
-</a></h1>
+          <h1 class="post-title" itemprop="name headline">JVM（1）- JVM内存区域
+</h1>
         
 
         <div class="post-meta">
@@ -442,17 +312,31 @@
       
 
       
-        
-          <h2 id="线程共享内存："><a href="#线程共享内存：" class="headerlink" title="线程共享内存："></a>线程共享内存：</h2><p><strong>1.堆内存</strong><br><strong>2.方法区</strong></p>
+        <h2 id="线程共享内存："><a href="#线程共享内存：" class="headerlink" title="线程共享内存："></a>线程共享内存：</h2><p><strong>1.堆内存</strong><br><strong>2.方法区</strong></p>
 <h2 id="线程隔离内存："><a href="#线程隔离内存：" class="headerlink" title="线程隔离内存："></a>线程隔离内存：</h2><p><strong>1.栈内存</strong><br><strong>2.程序计数器</strong></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/10/09/JVM1/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+<a id="more"></a>
+
+<h3 id="堆内存"><a href="#堆内存" class="headerlink" title="堆内存"></a>堆内存</h3><p>堆内存是JVM中最大的一块区域。</p>
+<p>1.主要用于存放对象和数组；</p>
+<p>2.所有线程共享；</p>
+<p>3.堆内存又分为新生代（YoungGeneration）和老年代（OldGeneration）新生代还可以分为Eden、From Survivor、To Survivor。</p>
+<h3 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h3><p>方法区也可以理解为堆的一个“逻辑部分”（一片连续的堆空间）。</p>
+<p>1.存储内容：</p>
+<p>​    ① 类信息</p>
+<p>​    ② 常量池</p>
+<p>​    ③ 静态变量</p>
+<p> ④ 编译代码</p>
+<p>2.在最常用的HotSpot（sun JDK和OpenJDK）虚拟机中，曾一度使用”永久代“的方式实现方法区，但是在jdk1.7开始准备“去永久代”的规划，已经把原本放在方法区中的静态变量、字符串常量池等移到堆内存中，（常量池除字符串常量池还有class常量池等），这里只是把字符串常量池移到堆内存中；在jdk1.8中，方法区已经不存在，原方法区中存储的类信息、编译后的代码数据等已经移动到了元空间（MetaSpace）中，元空间并没有处于堆内存上，而是直接占用的本地内存（NativeMemory）。</p>
+<p>3.去永久代的原因<br>（1）字符串存在永久代中，容易出现性能问题和内存溢出。  </p>
+<p>（2）类及方法的信息等比较难确定其大小，因此对于永久代的大小指定比较困难，太小容易出现永久代溢出，太大则容易导致老年代溢出。 </p>
+<p> （3）永久代会为 GC 带来不必要的复杂度，并且回收效率偏低。</p>
+<h3 id="栈内存"><a href="#栈内存" class="headerlink" title="栈内存"></a>栈内存</h3><p>栈内存又分本地方法栈(native method stack)和虚拟机栈(vm stack)，虚拟机栈执行的是Java方法，本地方法栈执行的是本地方法（Native Method）,其他基本上一致，在HotSpot中直接把本地方法栈和虚拟机栈合二为一。</p>
+<p>1.每个线程都有一个栈，每个栈里面都有N个栈帧，一个栈帧对应一个方法。JAVA中一个方法被调用到执行结束，就是一个栈帧从入栈到出栈的过程。</p>
+<p>2.栈帧中存放着局部变量表，操作数栈，动态链接，返回地址等。</p>
+<p><strong>Tips</strong>:每个线程栈的内存并不是分配的越多越好，如果单个栈的内存太多，在线程多的时候就会因为总的栈的内存不够而OOM，所以有时候把单个栈的内存调小也可以达到优化的效果</p>
+<h3 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h3><p>程序计数器是一块非常小的内存空间，可以看做是当前线程执行字节码的行号指示器，每个线程都有一个独立的程序计数器，因此程序计数器是线程私有的一块空间，此外，<strong>程序计数器是Java虚拟机规定的唯一不会发生内存溢出的区域</strong>。</p>
+<h3 id="元空间"><a href="#元空间" class="headerlink" title="元空间"></a>元空间</h3><p>上面说到，jdk1.8中，已经不存在永久代（方法区），替代它的一块空间叫做“元空间”，和永久代类似，都是JVM规范对方法区的实现，但是元空间并不在虚拟机中，而是使用本地内存，元空间的大小仅受本地内存限制，但可以通过-XX:MetaspaceSize和-XX:MaxMetaspaceSize来指定元空间的大小。</p>
+
       
     </div>
     
@@ -467,18 +351,40 @@
 
     <div>
       
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------　　　　本文结束　<i class="fa fa-heart"></i>　感谢您的阅读　　　　-------------</div>
+    
+</div>
+      
     </div>
     
     <footer class="post-footer">
       
 
       
+      
+      
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/10/10/JVM2/" rel="prev" title="JVM（2）- 垃圾回收算法">
+                JVM（2）- 垃圾回收算法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
 
       
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -488,10 +394,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -499,6 +406,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -519,8 +430,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -572,6 +492,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#线程共享内存："><span class="nav-number">1.</span> <span class="nav-text">线程共享内存：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程隔离内存："><span class="nav-number">2.</span> <span class="nav-text">线程隔离内存：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#堆内存"><span class="nav-number">2.1.</span> <span class="nav-text">堆内存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法区"><span class="nav-number">2.2.</span> <span class="nav-text">方法区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#栈内存"><span class="nav-number">2.3.</span> <span class="nav-text">栈内存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#程序计数器"><span class="nav-number">2.4.</span> <span class="nav-text">程序计数器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#元空间"><span class="nav-number">2.5.</span> <span class="nav-text">元空间</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -714,6 +650,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
