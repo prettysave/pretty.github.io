@@ -79,16 +79,17 @@
 
 
 
-<meta name="description" content="我想和你谈谈">
-<meta property="og:type" content="website">
-<meta property="og:title" content="嗯哼">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="JVM内存溢出种类1.堆内存溢出堆内存中主要存放对象、数组等，只要不断地创建这些对象，并且保证GC Roots到对象之间有可达路径来避免垃圾收集回收机制清除这些对象，当这些对象所占空间超过最大堆容量时，就会产生OutOfMemoryError的异常。 新产生的对象最初分配在新生代，新生代满后会进行一次Minor GC，如果Minor GC后空间不足会把该对象和新生代满足条件的对象放入老年代，老年代">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JVM（3）- JVM内存溢出">
+<meta property="og:url" content="http://yoursite.com/2019/10/13/JVM3/index.html">
 <meta property="og:site_name" content="嗯哼">
-<meta property="og:description" content="我想和你谈谈">
+<meta property="og:description" content="JVM内存溢出种类1.堆内存溢出堆内存中主要存放对象、数组等，只要不断地创建这些对象，并且保证GC Roots到对象之间有可达路径来避免垃圾收集回收机制清除这些对象，当这些对象所占空间超过最大堆容量时，就会产生OutOfMemoryError的异常。 新产生的对象最初分配在新生代，新生代满后会进行一次Minor GC，如果Minor GC后空间不足会把该对象和新生代满足条件的对象放入老年代，老年代">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-01-23T03:55:16.231Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="嗯哼">
-<meta name="twitter:description" content="我想和你谈谈">
+<meta name="twitter:title" content="JVM（3）- JVM内存溢出">
+<meta name="twitter:description" content="JVM内存溢出种类1.堆内存溢出堆内存中主要存放对象、数组等，只要不断地创建这些对象，并且保证GC Roots到对象之间有可达路径来避免垃圾收集回收机制清除这些对象，当这些对象所占空间超过最大堆容量时，就会产生OutOfMemoryError的异常。 新产生的对象最初分配在新生代，新生代满后会进行一次Minor GC，如果Minor GC后空间不足会把该对象和新生代满足条件的对象放入老年代，老年代">
 
 
 
@@ -118,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/">
+  <link rel="canonical" href="http://yoursite.com/2019/10/13/JVM3/">
 
 
 
 
 
-  <title>嗯哼</title>
+  <title>JVM（3）- JVM内存溢出 | 嗯哼</title>
   
 
 
@@ -143,8 +144,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
 <a href="https://github.com/prettysave" class="github-corner" aria-label="View source on GitHub">
@@ -226,137 +226,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/15/JVM4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="嗯哼">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="嗯哼">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/10/15/JVM4/" itemprop="url">JVM（4）- JVM性能调优</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-15T10:25:11+08:00">
-                2019-10-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="JVM性能调优"><a href="#JVM性能调优" class="headerlink" title="JVM性能调优"></a>JVM性能调优</h2><h3 id="JVM调优目标：使用较小的内存占用来获得较高的吞吐量或者较低的延迟。"><a href="#JVM调优目标：使用较小的内存占用来获得较高的吞吐量或者较低的延迟。" class="headerlink" title="JVM调优目标：使用较小的内存占用来获得较高的吞吐量或者较低的延迟。"></a>JVM调优目标：使用较小的内存占用来获得较高的吞吐量或者较低的延迟。</h3><p>程序在上线前的测试或运行中有时会出现一些大大小小的JVM问题，比如cpu load过高、请求延迟、tps降低等，甚至出现内存泄漏（每次垃圾收集使用的时间越来越长，垃圾收集频率越来越高，每次垃圾收集清理掉的垃圾数据越来越少）、内存溢出导致系统崩溃，因此需要对JVM进行调优，使得程序在正常运行的前提下，获得更高的用户体验和运行效率。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/10/15/JVM4/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-    
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
 
   
 
@@ -386,9 +258,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/10/13/JVM3/" itemprop="url">JVM（3）- JVM内存溢出</a></h1>
+          <h1 class="post-title" itemprop="name headline">JVM（3）- JVM内存溢出</h1>
         
 
         <div class="post-meta">
@@ -438,17 +308,31 @@
       
 
       
-        
-          <h2 id="JVM内存溢出种类"><a href="#JVM内存溢出种类" class="headerlink" title="JVM内存溢出种类"></a>JVM内存溢出种类</h2><h3 id="1-堆内存溢出"><a href="#1-堆内存溢出" class="headerlink" title="1.堆内存溢出"></a>1.堆内存溢出</h3><p>堆内存中主要存放对象、数组等，只要不断地创建这些对象，并且保证GC Roots到对象之间有可达路径来避免垃圾收集回收机制清除这些对象，当这些对象所占空间超过最大堆容量时，就会产生OutOfMemoryError的异常。</p>
+        <h2 id="JVM内存溢出种类"><a href="#JVM内存溢出种类" class="headerlink" title="JVM内存溢出种类"></a>JVM内存溢出种类</h2><h3 id="1-堆内存溢出"><a href="#1-堆内存溢出" class="headerlink" title="1.堆内存溢出"></a>1.堆内存溢出</h3><p>堆内存中主要存放对象、数组等，只要不断地创建这些对象，并且保证GC Roots到对象之间有可达路径来避免垃圾收集回收机制清除这些对象，当这些对象所占空间超过最大堆容量时，就会产生OutOfMemoryError的异常。</p>
 <p>新产生的对象最初分配在新生代，新生代满后会进行一次Minor GC，如果Minor GC后空间不足会把该对象和新生代满足条件的对象放入老年代，老年代空间不足时会进行Full GC，之后如果空间还不足以存放新对象则抛出OutOfMemoryError异常。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/10/13/JVM3/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+<a id="more"></a>
+
+
+<p><strong>常见原因</strong>：</p>
+<p><strong>1.内存中加载的数据过多如一次从数据库中取出过多数据</strong>；</p>
+<p><strong>2.集合对对象引用过多且使用完后没有清空</strong>；</p>
+<p><strong>3.代码中存在死循环或循环产生过多重复对象</strong>；</p>
+<p><strong>4.堆内存分配不合理；</strong></p>
+<p><strong>5.网络连接问题、数据库问题等</strong>。</p>
+<h3 id="2-栈内存溢出（虚拟机栈-本地方法栈）"><a href="#2-栈内存溢出（虚拟机栈-本地方法栈）" class="headerlink" title="2.栈内存溢出（虚拟机栈/本地方法栈）"></a>2.栈内存溢出（虚拟机栈/本地方法栈）</h3><ul>
+<li><strong>StackOverflowError</strong>：当线程请求的栈的深度大于虚拟机所允许的最大深度，则抛出StackOverflowError，简单理解就是虚拟机栈中的栈帧数量过多（一个线程嵌套调用的方法数量过多）时，就会抛出StackOverflowError异常。最常见的场景就是方法无限递归调用</li>
+</ul>
+<p><strong>tips:当出现StackOverflowError的时候说明虚拟机分配的栈的深度不够，可以通过增加栈的深度或者把方法嵌套的层数减少的方式优化</strong>。</p>
+<ul>
+<li><strong>OutOfMemoryError</strong>：如果虚拟机在扩展栈时无法申请到足够的内存空间，则抛出OutOfMemoryError。我们可以这样理解，虚拟机中可以供栈占用的空间≈可用物理内存 - 最大堆内存 - 最大方法区内存，比如一台机器内存为4G，系统和其他应用占用2G，虚拟机可用的物理内存为2G，最大堆内存为1G，最大方法区内存为512M，那可供栈占有的内存大约就是512M，假如我们设置每个线程栈的大小为1M，那虚拟机中最多可以创建512个线程，超过512个线程再创建就没有空间可以给栈了，就报OutOfMemoryError异常了。</li>
+</ul>
+<p><strong>总结</strong>：</p>
+<p>1.在线程较少的时候，某个线程请求深度过大，会报StackOverflow异常，解决这种问题可以适当加大栈的深度（增加栈空间大小），也就是把-Xss的值设置大一些，但一般情况下是代码问题的可能性较大；</p>
+<p>2.在虚拟机产生线程时，无法为该线程申请栈空间了，会报OutOfMemoryError异常，解决这种问题可以适当减小栈的深度，也就是把-Xss的值设置小一些，每个线程占用的空间小了，总空间一定就能容纳更多的线程，但是操作系统对一个进程的线程数有限制，经验值在3000~5000左右。在jdk1.5之前-Xss默认是256k，jdk1.5之后默认是1M，这个选项对系统硬性还是蛮大的，设置时要根据实际情况，谨慎操作。</p>
+<h3 id="3-方法区溢出"><a href="#3-方法区溢出" class="headerlink" title="3.方法区溢出"></a>3.方法区溢出</h3><p>前面说到，方法区主要用于存储虚拟机加载的类信息、常量、静态变量，以及编译器编译后的代码等数据，所以方法区溢出的原因就是没有足够的内存来存放这些数据。</p>
+<p> 由于在jdk1.6之前字符串常量池是存在于方法区中的，所以jdk1.6之前的虚拟机，不断产生不一致的字符串（同时GC Roots有可达路径）会产生方法区的OutOfMemoryError异常；方法区还存储加载的类信息，所以jdk1.7的虚拟机，不断创建大量的类也会导致方法区溢出。</p>
+<h3 id="4-本地直接内存溢出"><a href="#4-本地直接内存溢出" class="headerlink" title="4.本地直接内存溢出"></a>4.本地直接内存溢出</h3><p>本机直接内存（DirectMemory）并不是虚拟机运行时数据区的一部分，也不是Java虚拟机规范中定义的内存区域，但Java中用到NIO相关操作时（比如ByteBuffer的allocteDirect方法申请的是本机直接内存），也可能会出现内存溢出的异常。</p>
+
       
     </div>
     
@@ -463,149 +347,44 @@
 
     <div>
       
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------　　　　本文结束　<i class="fa fa-heart"></i>　感谢您的阅读　　　　-------------</div>
+    
+</div>
+      
     </div>
     
     <footer class="post-footer">
       
 
       
-
-      
-
       
       
-        <div class="post-eof"></div>
+
       
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/10/JVM2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="嗯哼">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="嗯哼">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/10/10/JVM2/" itemprop="url">JVM（2）- 垃圾回收算法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-10T17:03:24+08:00">
-                2019-10-10
-              </time>
+              <a href="/2019/10/10/JVM2/" rel="next" title="JVM（2）- 垃圾回收算法">
+                <i class="fa fa-chevron-left"></i> JVM（2）- 垃圾回收算法
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
+              <a href="/2019/10/15/JVM4/" rel="prev" title="JVM（4）- JVM性能调优">
+                JVM（4）- JVM性能调优 <i class="fa fa-chevron-right"></i>
+              </a>
             
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <h2 id="如何判断对象可以回收"><a href="#如何判断对象可以回收" class="headerlink" title="如何判断对象可以回收"></a>如何判断对象可以回收</h2><h3 id="1-引用计数法"><a href="#1-引用计数法" class="headerlink" title="1.引用计数法"></a>1.引用计数法</h3><p>给每一个对象添加一个引用计数器，每当有一个地方引用它时，计数器值加1；每当有一个地方不再引用它时，计数器值减1，这样只要计数器的值不为0，就说明还有地方引用它，它就不是无用的对象。</p>
-<p><strong>Tips:</strong></p>
-<p><strong>（1）当两个对象互相调用的时候，它们的引用计数都是1，都无法回收；</strong></p>
-<p><strong>（2）当前的主流虚拟机都没有采用</strong></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/10/10/JVM2/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-    
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -615,140 +394,11 @@
   </article>
 
 
-    
-      
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/09/JVM1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="嗯哼">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="嗯哼">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/10/09/JVM1/" itemprop="url">JVM（1）- JVM内存区域
-</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-09T13:47:19+08:00">
-                2019-10-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="线程共享内存："><a href="#线程共享内存：" class="headerlink" title="线程共享内存："></a>线程共享内存：</h2><p><strong>1.堆内存</strong><br><strong>2.方法区</strong></p>
-<h2 id="线程隔离内存："><a href="#线程隔离内存：" class="headerlink" title="线程隔离内存："></a>线程隔离内存：</h2><p><strong>1.栈内存</strong><br><strong>2.程序计数器</strong></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/10/09/JVM1/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+    <div class="post-spread">
       
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-    
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
 
 
           </div>
@@ -756,6 +406,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -776,8 +430,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -829,6 +492,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM内存溢出种类"><span class="nav-number">1.</span> <span class="nav-text">JVM内存溢出种类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-堆内存溢出"><span class="nav-number">1.1.</span> <span class="nav-text">1.堆内存溢出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-栈内存溢出（虚拟机栈-本地方法栈）"><span class="nav-number">1.2.</span> <span class="nav-text">2.栈内存溢出（虚拟机栈/本地方法栈）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-方法区溢出"><span class="nav-number">1.3.</span> <span class="nav-text">3.方法区溢出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-本地直接内存溢出"><span class="nav-number">1.4.</span> <span class="nav-text">4.本地直接内存溢出</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -971,6 +650,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
