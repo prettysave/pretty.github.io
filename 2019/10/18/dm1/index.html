@@ -79,16 +79,20 @@
 
 
 
-<meta name="description" content="我想和你谈谈">
-<meta property="og:type" content="website">
-<meta property="og:title" content="嗯哼">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="创建型模式简单工厂模式一个工厂类XxxFactory,里面有一个静态方法，根据不同的传入参数，返回不同的派生自同一个类（接口）的实例对象。 tips:强调职责单一原则，一个类只提供一个功能，例如FoodFactory的功能就是只负责生产food,可以根据参数如‘’noodle”,”chicken”更生成不同的实例对象。 工厂模式不同于简单工厂模式，工厂模式不仅一个工厂能生成多种Food,并且会有多">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式（1）-创建型模式">
+<meta property="og:url" content="http://yoursite.com/2019/10/18/dm1/index.html">
 <meta property="og:site_name" content="嗯哼">
-<meta property="og:description" content="我想和你谈谈">
+<meta property="og:description" content="创建型模式简单工厂模式一个工厂类XxxFactory,里面有一个静态方法，根据不同的传入参数，返回不同的派生自同一个类（接口）的实例对象。 tips:强调职责单一原则，一个类只提供一个功能，例如FoodFactory的功能就是只负责生产food,可以根据参数如‘’noodle”,”chicken”更生成不同的实例对象。 工厂模式不同于简单工厂模式，工厂模式不仅一个工厂能生成多种Food,并且会有多">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/10/19/1668ac9a05f8e190?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/10/19/1668ac9a0665ea60?imageslim">
+<meta property="og:updated_time" content="2020-02-04T15:23:56.551Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="嗯哼">
-<meta name="twitter:description" content="我想和你谈谈">
+<meta name="twitter:title" content="设计模式（1）-创建型模式">
+<meta name="twitter:description" content="创建型模式简单工厂模式一个工厂类XxxFactory,里面有一个静态方法，根据不同的传入参数，返回不同的派生自同一个类（接口）的实例对象。 tips:强调职责单一原则，一个类只提供一个功能，例如FoodFactory的功能就是只负责生产food,可以根据参数如‘’noodle”,”chicken”更生成不同的实例对象。 工厂模式不同于简单工厂模式，工厂模式不仅一个工厂能生成多种Food,并且会有多">
+<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2018/10/19/1668ac9a05f8e190?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
 
 
 
@@ -118,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/">
+  <link rel="canonical" href="http://yoursite.com/2019/10/18/dm1/">
 
 
 
 
 
-  <title>嗯哼</title>
+  <title>设计模式（1）-创建型模式 | 嗯哼</title>
   
 
 
@@ -143,8 +147,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
 <a href="https://github.com/prettysave" class="github-corner" aria-label="View source on GitHub">
@@ -226,9 +229,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -258,9 +261,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/10/18/dm1/" itemprop="url">设计模式（1）-创建型模式</a></h1>
+          <h1 class="post-title" itemprop="name headline">设计模式（1）-创建型模式</h1>
         
 
         <div class="post-meta">
@@ -310,9 +311,7 @@
       
 
       
-        
-          
-            <h2 id="创建型模式"><a href="#创建型模式" class="headerlink" title="创建型模式"></a>创建型模式</h2><h3 id="简单工厂模式"><a href="#简单工厂模式" class="headerlink" title="简单工厂模式"></a>简单工厂模式</h3><p>一个工厂类XxxFactory,里面有一个静态方法，根据不同的传入参数，返回不同的派生自同一个类（接口）的实例对象。</p>
+        <h2 id="创建型模式"><a href="#创建型模式" class="headerlink" title="创建型模式"></a>创建型模式</h2><h3 id="简单工厂模式"><a href="#简单工厂模式" class="headerlink" title="简单工厂模式"></a>简单工厂模式</h3><p>一个工厂类XxxFactory,里面有一个静态方法，根据不同的传入参数，返回不同的派生自同一个类（接口）的实例对象。</p>
 <p><strong>tips</strong>:强调职责单一原则，一个类只提供一个功能，例如FoodFactory的功能就是只负责生产food,可以根据参数如‘’noodle”,”chicken”更生成不同的实例对象。</p>
 <h3 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h3><p>不同于简单工厂模式，工厂模式不仅一个工厂能生成多种Food,并且会有多个工厂，多个工厂都派生自顶层的抽象类（接口）Factory。例如ChineseFactory和AmericanFactory</p>
 <p>不同的工厂的生产方法是一样的，<strong>客户端在调用的时候选择好需要的工厂</strong>，工厂就会根据传递的参数返回不同的实例对象。 </p>
@@ -343,8 +342,6 @@
 <p>简单工厂模式最简单；工厂模式在简单工厂模式的基础上增加了选择工厂的维度，需要第一步选择合适的工厂；抽象工厂模式有产品族的概念，如果各个产品是存在兼容性问题的，就要用抽象工厂模式。单例模式就不说了，为了保证全局使用的是同一对象，一方面是安全性考虑，一方面是为了节省资源；建造者模式专门对付属性很多的那种类，为了让代码更优美；原型模式用得最少，了解和 Object 类中的 clone() 方法相关的知识即可。</p>
 <p>参考链接：<a href="https://juejin.im/post/5bc96afff265da0aa94a4493" target="_blank" rel="noopener">https://juejin.im/post/5bc96afff265da0aa94a4493</a></p>
 
-          
-        
       
     </div>
     
@@ -359,146 +356,40 @@
 
     <div>
       
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------　　　　本文结束　<i class="fa fa-heart"></i>　感谢您的阅读　　　　-------------</div>
+    
+</div>
+      
     </div>
     
     <footer class="post-footer">
       
 
       
-
-      
-
       
       
-        <div class="post-eof"></div>
+
       
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/15/JVM4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="嗯哼">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="嗯哼">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/10/15/JVM4/" itemprop="url">JVM（4）- JVM性能调优</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-15T10:25:11+08:00">
-                2019-10-15
-              </time>
+              <a href="/2019/10/15/JVM4/" rel="next" title="JVM（4）- JVM性能调优">
+                <i class="fa fa-chevron-left"></i> JVM（4）- JVM性能调优
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <h2 id="JVM性能调优"><a href="#JVM性能调优" class="headerlink" title="JVM性能调优"></a>JVM性能调优</h2><h3 id="JVM调优目标：使用较小的内存占用来获得较高的吞吐量或者较低的延迟。"><a href="#JVM调优目标：使用较小的内存占用来获得较高的吞吐量或者较低的延迟。" class="headerlink" title="JVM调优目标：使用较小的内存占用来获得较高的吞吐量或者较低的延迟。"></a>JVM调优目标：使用较小的内存占用来获得较高的吞吐量或者较低的延迟。</h3><p>程序在上线前的测试或运行中有时会出现一些大大小小的JVM问题，比如cpu load过高、请求延迟、tps降低等，甚至出现内存泄漏（每次垃圾收集使用的时间越来越长，垃圾收集频率越来越高，每次垃圾收集清理掉的垃圾数据越来越少）、内存溢出导致系统崩溃，因此需要对JVM进行调优，使得程序在正常运行的前提下，获得更高的用户体验和运行效率。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/10/15/JVM4/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-    
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -508,400 +399,11 @@
   </article>
 
 
-    
-      
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/13/JVM3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="嗯哼">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="嗯哼">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/10/13/JVM3/" itemprop="url">JVM（3）- JVM内存溢出</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-13T16:33:45+08:00">
-                2019-10-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="JVM内存溢出种类"><a href="#JVM内存溢出种类" class="headerlink" title="JVM内存溢出种类"></a>JVM内存溢出种类</h2><h3 id="1-堆内存溢出"><a href="#1-堆内存溢出" class="headerlink" title="1.堆内存溢出"></a>1.堆内存溢出</h3><p>堆内存中主要存放对象、数组等，只要不断地创建这些对象，并且保证GC Roots到对象之间有可达路径来避免垃圾收集回收机制清除这些对象，当这些对象所占空间超过最大堆容量时，就会产生OutOfMemoryError的异常。</p>
-<p>新产生的对象最初分配在新生代，新生代满后会进行一次Minor GC，如果Minor GC后空间不足会把该对象和新生代满足条件的对象放入老年代，老年代空间不足时会进行Full GC，之后如果空间还不足以存放新对象则抛出OutOfMemoryError异常。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/10/13/JVM3/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+    <div class="post-spread">
       
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-    
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/10/JVM2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="嗯哼">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="嗯哼">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/10/10/JVM2/" itemprop="url">JVM（2）- 垃圾回收算法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-10T17:03:24+08:00">
-                2019-10-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="如何判断对象可以回收"><a href="#如何判断对象可以回收" class="headerlink" title="如何判断对象可以回收"></a>如何判断对象可以回收</h2><h3 id="1-引用计数法"><a href="#1-引用计数法" class="headerlink" title="1.引用计数法"></a>1.引用计数法</h3><p>给每一个对象添加一个引用计数器，每当有一个地方引用它时，计数器值加1；每当有一个地方不再引用它时，计数器值减1，这样只要计数器的值不为0，就说明还有地方引用它，它就不是无用的对象。</p>
-<p><strong>Tips:</strong></p>
-<p><strong>（1）当两个对象互相调用的时候，它们的引用计数都是1，都无法回收；</strong></p>
-<p><strong>（2）当前的主流虚拟机都没有采用</strong></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/10/10/JVM2/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-    
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/09/JVM1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="嗯哼">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="嗯哼">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/10/09/JVM1/" itemprop="url">JVM（1）- JVM内存区域
-</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-09T13:47:19+08:00">
-                2019-10-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="线程共享内存："><a href="#线程共享内存：" class="headerlink" title="线程共享内存："></a>线程共享内存：</h2><p><strong>1.堆内存</strong><br><strong>2.方法区</strong></p>
-<h2 id="线程隔离内存："><a href="#线程隔离内存：" class="headerlink" title="线程隔离内存："></a>线程隔离内存：</h2><p><strong>1.栈内存</strong><br><strong>2.程序计数器</strong></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/10/09/JVM1/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-    
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
 
 
           </div>
@@ -909,6 +411,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -929,8 +435,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -982,6 +497,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建型模式"><span class="nav-number">1.</span> <span class="nav-text">创建型模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单工厂模式"><span class="nav-number">1.1.</span> <span class="nav-text">简单工厂模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工厂模式"><span class="nav-number">1.2.</span> <span class="nav-text">工厂模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#抽象工厂模式"><span class="nav-number">1.3.</span> <span class="nav-text">抽象工厂模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单例模式"><span class="nav-number">1.4.</span> <span class="nav-text">单例模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#饿汉模式："><span class="nav-number">1.4.1.</span> <span class="nav-text">饿汉模式：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#饱汉模式："><span class="nav-number">1.4.2.</span> <span class="nav-text">饱汉模式：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#建造者模式"><span class="nav-number">1.5.</span> <span class="nav-text">建造者模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原型模式"><span class="nav-number">1.6.</span> <span class="nav-text">原型模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建型模式总结"><span class="nav-number">1.7.</span> <span class="nav-text">创建型模式总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1124,6 +655,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
