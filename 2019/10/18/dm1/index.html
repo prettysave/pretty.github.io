@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="创建型模式简单工厂模式一个工厂类XxxFactory,里面有一个静态方法，根据不同的传入参数，返回不同的派生自同一个类（接口）的实例对象。 tips:强调职责单一原则，一个类只提供一个功能，例如FoodFactory的功能就是只负责生产food,可以根据参数如‘’noodle”,”chicken”更生成不同的实例对象。 工厂模式不同于简单工厂模式，工厂模式不仅一个工厂能生成多种Food,并且会有多">
+<meta name="description" content="创建型模式简单工厂模式一个工厂类XxxFactory,里面有一个静态方法，根据不同的传入参数，返回不同的派生自同一个类（接口）的实例对象。 tips:强调职责单一原则，一个类只提供一个功能，例如FoodFactory的功能就是只负责生产food,可以根据参数如‘’noodle”,”chicken”更生成不同的实例对象。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="设计模式（1）-创建型模式">
 <meta property="og:url" content="http://yoursite.com/2019/10/18/dm1/index.html">
 <meta property="og:site_name" content="嗯哼">
-<meta property="og:description" content="创建型模式简单工厂模式一个工厂类XxxFactory,里面有一个静态方法，根据不同的传入参数，返回不同的派生自同一个类（接口）的实例对象。 tips:强调职责单一原则，一个类只提供一个功能，例如FoodFactory的功能就是只负责生产food,可以根据参数如‘’noodle”,”chicken”更生成不同的实例对象。 工厂模式不同于简单工厂模式，工厂模式不仅一个工厂能生成多种Food,并且会有多">
+<meta property="og:description" content="创建型模式简单工厂模式一个工厂类XxxFactory,里面有一个静态方法，根据不同的传入参数，返回不同的派生自同一个类（接口）的实例对象。 tips:强调职责单一原则，一个类只提供一个功能，例如FoodFactory的功能就是只负责生产food,可以根据参数如‘’noodle”,”chicken”更生成不同的实例对象。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/10/19/1668ac9a05f8e190?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/10/19/1668ac9a0665ea60?imageslim">
-<meta property="og:updated_time" content="2020-02-04T15:23:56.551Z">
+<meta property="og:updated_time" content="2020-02-05T03:26:22.151Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式（1）-创建型模式">
-<meta name="twitter:description" content="创建型模式简单工厂模式一个工厂类XxxFactory,里面有一个静态方法，根据不同的传入参数，返回不同的派生自同一个类（接口）的实例对象。 tips:强调职责单一原则，一个类只提供一个功能，例如FoodFactory的功能就是只负责生产food,可以根据参数如‘’noodle”,”chicken”更生成不同的实例对象。 工厂模式不同于简单工厂模式，工厂模式不仅一个工厂能生成多种Food,并且会有多">
+<meta name="twitter:description" content="创建型模式简单工厂模式一个工厂类XxxFactory,里面有一个静态方法，根据不同的传入参数，返回不同的派生自同一个类（接口）的实例对象。 tips:强调职责单一原则，一个类只提供一个功能，例如FoodFactory的功能就是只负责生产food,可以根据参数如‘’noodle”,”chicken”更生成不同的实例对象。">
 <meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2018/10/19/1668ac9a05f8e190?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
 
 
@@ -313,11 +313,13 @@
       
         <h2 id="创建型模式"><a href="#创建型模式" class="headerlink" title="创建型模式"></a>创建型模式</h2><h3 id="简单工厂模式"><a href="#简单工厂模式" class="headerlink" title="简单工厂模式"></a>简单工厂模式</h3><p>一个工厂类XxxFactory,里面有一个静态方法，根据不同的传入参数，返回不同的派生自同一个类（接口）的实例对象。</p>
 <p><strong>tips</strong>:强调职责单一原则，一个类只提供一个功能，例如FoodFactory的功能就是只负责生产food,可以根据参数如‘’noodle”,”chicken”更生成不同的实例对象。</p>
+<a id="more"></a>
+
 <h3 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h3><p>不同于简单工厂模式，工厂模式不仅一个工厂能生成多种Food,并且会有多个工厂，多个工厂都派生自顶层的抽象类（接口）Factory。例如ChineseFactory和AmericanFactory</p>
 <p>不同的工厂的生产方法是一样的，<strong>客户端在调用的时候选择好需要的工厂</strong>，工厂就会根据传递的参数返回不同的实例对象。 </p>
 <p><img src="https://user-gold-cdn.xitu.io/2018/10/19/1668ac9a05f8e190?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="factory-1"></p>
 <h3 id="抽象工厂模式"><a href="#抽象工厂模式" class="headerlink" title="抽象工厂模式"></a>抽象工厂模式</h3><p>当涉及到<strong>产品族</strong>的概念时，就要引入抽象工厂模式了。</p>
-<p>例如在生产电脑的时候，CPU我们需要一个Factory,此时就会有AMDCPUFactory,IntelCPUFactory。主板我们需要一个Factory,此时也会分别有AMDMainBoardFactory和IntelMainFactoryFactory。当我们需要硬盘、内存条、电源。。。等，这样会产生大量的工厂，当然，这样的好处是解耦了。</p>
+<p>例如在生产电脑的时候，CPU我们需要一个Factory,此时就会有AMDCPUFactory和IntelCPUFactory。主板我们需要一个Factory,此时也会分别有AMDMainBoardFactory和IntelMainFactoryFactory。当我们需要硬盘、内存条、电源。。。等，这样会产生大量的工厂，当然，这样的好处是解耦了。</p>
 <p>但是因为现实中因为Intel和AMD的CPU和主板会出现不兼容的情况，所以如果把所有的工厂都交给客户端调用的话可能就会出现错误的情况。这个时候我们可以选择把“造电脑”抽象出来，抽象一个“ComputerFactory”,然后派生出AMDComputerFactory和IntelComputerFactory.将生产CPU、主板、硬盘等方法都放到里面。客户端在调用的时候先选择好需要的ComputerFactory，这也生产的零件就不会有冲突的情况了。客户端也可以灵活的选择组装电脑的零件，例如有的需要两个硬盘，有的不需要显卡等等。</p>
 <p>抽象工厂有个明显的缺点就是工厂的功能比较耦合，违背了<strong>职责单一</strong>原则。当ComputerFactory需要增加一个例如生产显示器的功能的时候，需要修改其所有的派生工厂，违背了<strong>对修改关闭，对扩展开放</strong>的原则。</p>
 <p><strong>tips</strong>:设计模式是死的，人是活的，有时候因为业务的強限制，适当破坏原则也是可以的。</p>
@@ -384,6 +386,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/11/05/dm2/" rel="prev" title="设计模式（2）- 结构型模式">
+                设计模式（2）- 结构型模式 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -460,7 +466,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

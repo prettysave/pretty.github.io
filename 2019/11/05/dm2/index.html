@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="结构性模式代理模式代理模式简而言之就是用一个代理类来隐藏具体实现类，代理类和具体实现类派生自同一个接口，代理类里有一个具体实现类的实例对象，客户端调用代理类的方法，代理类的方法体里用具体实现类的实例对象调用对应的方法。通常在调用真实前后会加一部分逻辑。 tips:Spring中的AOP就是典型的代理模式，我们自己不定义代理类，但是 Spring 会帮我们动态来定义代理，然后把我们定义在 @Befo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式（2）- 结构型模式">
+<meta property="og:url" content="http://yoursite.com/2019/11/05/dm2/index.html">
+<meta property="og:site_name" content="嗯哼">
+<meta property="og:description" content="结构性模式代理模式代理模式简而言之就是用一个代理类来隐藏具体实现类，代理类和具体实现类派生自同一个接口，代理类里有一个具体实现类的实例对象，客户端调用代理类的方法，代理类的方法体里用具体实现类的实例对象调用对应的方法。通常在调用真实前后会加一部分逻辑。 tips:Spring中的AOP就是典型的代理模式，我们自己不定义代理类，但是 Spring 会帮我们动态来定义代理，然后把我们定义在 @Befo">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/10/19/1668ac9a05ed0c11?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/10/19/1668ac9a06753244?imageslim">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/10/19/1668ac9a06512b0c?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/10/19/1668ac9a06d8cfb2?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/10/19/1668ac9a07119726?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/10/19/1668ac9a077cd10d?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/10/19/1668ac9a072fcc13?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="og:updated_time" content="2020-02-06T16:53:47.007Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="设计模式（2）- 结构型模式">
+<meta name="twitter:description" content="结构性模式代理模式代理模式简而言之就是用一个代理类来隐藏具体实现类，代理类和具体实现类派生自同一个接口，代理类里有一个具体实现类的实例对象，客户端调用代理类的方法，代理类的方法体里用具体实现类的实例对象调用对应的方法。通常在调用真实前后会加一部分逻辑。 tips:Spring中的AOP就是典型的代理模式，我们自己不定义代理类，但是 Spring 会帮我们动态来定义代理，然后把我们定义在 @Befo">
+<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2018/10/19/1668ac9a05ed0c11?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/11/05/dm2/">
+
+
+
+
+
+  <title>设计模式（2）- 结构型模式 | 嗯哼</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+<a href="https://github.com/prettysave" class="github-corner" aria-label="View source on GitHub">
+  <svg width="80" height="80" viewbox="0 0 250 250" style="fill:#70B7FD; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true">
+    <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/>
+    <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/>
+  </svg>
+</a>
+
+<style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+   
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">嗯哼</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/05/dm2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="嗯哼">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="嗯哼">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">设计模式（2）- 结构型模式</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-05T11:27:58+08:00">
+                2019-11-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="结构性模式"><a href="#结构性模式" class="headerlink" title="结构性模式"></a>结构性模式</h2><h3 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h3><p>代理模式简而言之就是用一个代理类来隐藏具体实现类，代理类和具体实现类派生自同一个接口，代理类里有一个具体实现类的实例对象，客户端调用代理类的方法，代理类的方法体里用具体实现类的实例对象调用对应的方法。通常在调用真实前后会加一部分逻辑。</p>
+<p><strong>tips</strong>:Spring中的AOP就是典型的代理模式，我们自己不定义代理类，但是 Spring 会帮我们动态来定义代理，然后把我们定义在 @Before、@After、@Around 中的代码逻辑动态添加到代理中。</p>
+<a id="more"></a>
+
+<p><img src="https://user-gold-cdn.xitu.io/2018/10/19/1668ac9a05ed0c11?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="proxy"></p>
+<h3 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h3><p>适配器模式做的就是，有一个接口需要实现，但是我们现成的对象都不满足，需要加一层适配器来进行适配。即：3.实际类→2.适配器类→1.目标接口；</p>
+<p>和代理模式的区别在于代理模式的是：</p>
+<p>3.代理类→目标接口（类）；</p>
+<p>2.具体实现类→1.目标接口（类）；</p>
+<p><strong>tips</strong>：“→”表示派生</p>
+<p> 适配器模式总体来说分三种：<strong>默认适配器模式、对象适配器模式、类适配器模式</strong>。</p>
+<h4 id="默认适配器模式"><a href="#默认适配器模式" class="headerlink" title="默认适配器模式"></a>默认适配器模式</h4><p>默认适配器就很简单，大体上就是如下：</p>
+<p>我们有一个目标接口，定义了很多的方法假设是A,B,C,D,E共5个方法，这是我们需要一个类，其中要有A,B,两个方法，又需要一个类，其中有C,D方法。如果直接去实现目标接口的话，则还分别需要实现其他我们不需要的方法，这个时候我们可以在<strong>需要的类</strong>与<strong>目标接口</strong>之间加一个<strong>中间类</strong>，<strong>中间类</strong>实现<strong>目标接口</strong>，并且把所有的方法都以空的形式实现，然后我们<strong>需要的类</strong>继承<strong>中间类</strong>，只选择需要的方法重写。这就是默认适配器模式。</p>
+<h4 id="对象适配器模式"><a href="#对象适配器模式" class="headerlink" title="对象适配器模式"></a>对象适配器模式</h4><p>当我们需要B类，但是只有A类，可以定义一个C类，C类实现B类，然后把A类的实例对象注入到C类中，C类可以使用A类现有的功能来实现B类的功能，这个C类就是适配器，这个模式就是适配器模式。</p>
+<p>例如当我们需要一只鸭，但是我们只有一只鸡，这个时候就需要定义一个适配器，由这个适配器来充当鸭，但是适配器里面的方法还是由鸡来实现的。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/10/19/1668ac9a06753244?imageslim" alt="img"></p>
+<h4 id="类适配器模式"><a href="#类适配器模式" class="headerlink" title="类适配器模式"></a>类适配器模式</h4><p>类适配器模式与对象适配器相比，相同点在于都有一个现有的A类,且C类也实现B类，不同点在于我们不是把A类的对象注入到C类中，而是C类在实现B类的同时也继承A类，这时适配器C类中通过继承就拥有了A类的方法，客户端在使用的时候就可以以C类的身份（因为C类实现了B类，C类也可以当B类使用）使用A类的功能。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/10/19/1668ac9a06512b0c?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="adapter-1"></p>
+<h4 id="适配器模式总结"><a href="#适配器模式总结" class="headerlink" title="适配器模式总结"></a>适配器模式总结</h4><p>类适配和对象适配的异同</p>
+<blockquote>
+<p>一个采用继承，一个采用组合；</p>
+<p>类适配属于静态实现，对象适配属于组合的动态实现，对象适配需要多实例化一个对象。</p>
+<p>总体来说，对象适配用得比较多。</p>
+</blockquote>
+<p>2.适配器模式和代理模式的异同</p>
+<p>比较这两种模式，其实是比较对象适配器模式和代理模式，在代码结构上，它们很相似，都需要一个具体的实现类的实例。但是它们的目的不一样，代理模式做的是增强原方法的活；适配器做的是适配的活，为的是提供“把鸡包装成鸭，然后当做鸭来使用”，而鸡和鸭它们之间原本没有继承关系。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/10/19/1668ac9a06d8cfb2?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="adapter-5"></p>
+<h3 id="桥梁模式（桥接模式）"><a href="#桥梁模式（桥接模式）" class="headerlink" title="桥梁模式（桥接模式）"></a>桥梁模式（桥接模式）</h3><p>桥梁模式:将抽象部分与它的实现部分分离,使它们都可以独立地变化。</p>
+<p>例如当我们要画图形的时候,这里就可以有两种扩展方向:</p>
+<p>1.画,我们可以用红色,绿色,黑色..等</p>
+<p>2.图形,可以试圆型,可以是矩形</p>
+<p>这个时候可以定义两个接口Shape()和Draw();Shape()里面注入一个Draw()的实例。并且不同的扩展方向实现不同的接口。这里的Draw()就是桥梁。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/10/19/1668ac9a07119726?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="bridge-1"></p>
+<h3 id="装饰模式"><a href="#装饰模式" class="headerlink" title="装饰模式"></a>装饰模式</h3><p>装饰模式 ：不改变原有对象的前提下，动态地给一个对象增加一些额外的功能。</p>
+<p>代理模式的增强是在编译期增强，装饰者模式可以在运行时动态的扩展一个对象的功能。</p>
+<p>装饰模式的典型例子就是”水果茶“，例如”芒果绿茶“，”柠檬红茶“，”芒果柠檬绿茶“。这里的茶是最顶级的接口，”红茶“和”绿茶“可以是”茶“的具体实现类。我们可以定义一个”调料“抽象类来实现”茶“这个顶层实现类，同时通过组合把”红茶“，”绿茶“等具体的实现类注入到”调料“的具体实类中。</p>
+<p>当有多个”调料”的具体实现类时，客户端在使用的时候就可以创建一个”某茶“的具体实例，然后把这个实例不断的传递在不同的”调料”的实例对象中，这样也就可以自由组合的对“某茶”进行“装饰”了。</p>
+<p>当我们需要增加调料的时候，只需要增加实现“调料”类的实现就可以了，并且每增加一种“调料”，通过不同的组合，最终装饰出来的“某茶”也可以有很多种。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/10/19/1668ac9a077cd10d?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="decorator-2"></p>
+<p>InputStream派生出来的部分类：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/10/19/1668ac9a072fcc13?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="decorator-3"></p>
+<p><strong>tips</strong>:装饰者模式需要创建一些具体装饰类，会增加系统的复杂度。</p>
+<h3 id="门面模式（外观模式）"><a href="#门面模式（外观模式）" class="headerlink" title="门面模式（外观模式）"></a>门面模式（外观模式）</h3><p>门面模式：外观模式定义了一个高层接口，为子系统中的一组接口提供一个统一的向外的接口（门面）。</p>
+<p>高层接口内部可以组合子系统中的多个接口来实现某一功能，这部分相当于是帮助客户端做的。这样可以降低客户端代码与接口提供方的耦合读，也符合<strong>最少知道原则（迪米特法则）</strong>，只给接口调用方暴露功能，但是隐藏具体的实现。</p>
+<p>缺点在于违背了<strong>开闭原则</strong>：当增加新的子系统是可能需要修改门面类的代码</p>
+<h3 id="享元模式"><a href="#享元模式" class="headerlink" title="享元模式"></a>享元模式</h3><p>享元模式：运用共享技术复用大量细粒度的对象,降低程序内存的占用,提高程序的性能。</p>
+<p>享元分开来说就是共享元器件，也就是复用已经生成的对象，这种做法当然也就是轻量级的了。复用对象最简单的方式是，用一个 HashMap 来存放每次新生成的对象。每次需要一个对象的时候，先到 HashMap 中看看有没有，如果没有，再生成新的对象，然后将这个对象放入 HashMap 中。</p>
+<h3 id="结构型模式总结"><a href="#结构型模式总结" class="headerlink" title="结构型模式总结"></a>结构型模式总结</h3><p>代理模式是做方法增强的，适配器模式是把鸡包装成鸭这种用来适配接口的，桥梁模式做到了很好的解耦，装饰模式从名字上就看得出来，适合于装饰类或者说是增强类的场景，门面模式的优点是客户端不需要关心实例化过程与功能的具体实现，只要调用需要的方法即可，享元模式是为了在特定的场景中复用已经创建的对象，用于提高性能。</p>
+<p>参考链接：<a href="https://juejin.im/post/5bc96afff265da0aa94a4493" target="_blank" rel="noopener">https://juejin.im/post/5bc96afff265da0aa94a4493</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------　　　　本文结束　<i class="fa fa-heart"></i>　感谢您的阅读　　　　-------------</div>
+    
+</div>
+      
+    </div>
+    
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/18/dm1/" rel="next" title="设计模式（1）-创建型模式">
+                <i class="fa fa-chevron-left"></i> 设计模式（1）-创建型模式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">嗯哼</p>
+              <p class="site-description motion-element" itemprop="description">我想和你谈谈</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/prettysave" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#结构性模式"><span class="nav-number">1.</span> <span class="nav-text">结构性模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#代理模式"><span class="nav-number">1.1.</span> <span class="nav-text">代理模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#适配器模式"><span class="nav-number">1.2.</span> <span class="nav-text">适配器模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#默认适配器模式"><span class="nav-number">1.2.1.</span> <span class="nav-text">默认适配器模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对象适配器模式"><span class="nav-number">1.2.2.</span> <span class="nav-text">对象适配器模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类适配器模式"><span class="nav-number">1.2.3.</span> <span class="nav-text">类适配器模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#适配器模式总结"><span class="nav-number">1.2.4.</span> <span class="nav-text">适配器模式总结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#桥梁模式（桥接模式）"><span class="nav-number">1.3.</span> <span class="nav-text">桥梁模式（桥接模式）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#装饰模式"><span class="nav-number">1.4.</span> <span class="nav-text">装饰模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#门面模式（外观模式）"><span class="nav-number">1.5.</span> <span class="nav-text">门面模式（外观模式）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#享元模式"><span class="nav-number">1.6.</span> <span class="nav-text">享元模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结构型模式总结"><span class="nav-number">1.7.</span> <span class="nav-text">结构型模式总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">嗯哼</span>
+
+  
+</div>
+
+<!-- 隐藏网页底部 powered By Hexo
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+-->
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
