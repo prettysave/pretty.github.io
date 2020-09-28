@@ -2,21 +2,23 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>JVM（2）- 垃圾回收算法 | 嗯哼</title>
+  <title>JVM - 垃圾回收算法 | 嗯哼</title>
   <meta name="keywords" content=" JVM ">
-  <meta name="description" content="JVM（2）- 垃圾回收算法 | 嗯哼">
+  <meta name="description" content="JVM - 垃圾回收算法 | 嗯哼">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="## 页面未找到！">
+<meta name="description" content="关于我到目前为止已经写了篇文章， 共字。 本站访问人数：人次 ， 访问量：次 博客平台这个博客通过 Hexo 生成，部署在 GitHub Pages主题 3-hexo 已经在github上开源 3-hexo 主题使用交流可以加 Q群:">
 <meta property="og:type" content="website">
-<meta property="og:title" content="404">
-<meta property="og:url" content="http://yoursite.com/404.html">
+<meta property="og:title" content="天下大事 比作于细">
+<meta property="og:url" content="http://yoursite.com/about/index.html">
 <meta property="og:site_name" content="嗯哼">
-<meta property="og:description" content="## 页面未找到！">
+<meta property="og:description" content="关于我到目前为止已经写了篇文章， 共字。 本站访问人数：人次 ， 访问量：次 博客平台这个博客通过 Hexo 生成，部署在 GitHub Pages主题 3-hexo 已经在github上开源 3-hexo 主题使用交流可以加 Q群:">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-09-25T04:48:17.169Z">
+<meta property="og:image" content="http://pub.idqqimg.com/wpa/images/group.png">
+<meta property="og:updated_time" content="2020-09-25T07:29:01.315Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="404">
-<meta name="twitter:description" content="## 页面未找到！">
+<meta name="twitter:title" content="天下大事 比作于细">
+<meta name="twitter:description" content="关于我到目前为止已经写了篇文章， 共字。 本站访问人数：人次 ， 访问量：次 博客平台这个博客通过 Hexo 生成，部署在 GitHub Pages主题 3-hexo 已经在github上开源 3-hexo 主题使用交流可以加 Q群:">
+<meta name="twitter:image" content="http://pub.idqqimg.com/wpa/images/group.png">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -131,11 +133,11 @@
 
 
 <ul>
-    <li><div class="all active" data-rel="全部文章">全部文章<small>(9)</small></div></li>
+    <li><div class="all active" data-rel="全部文章">全部文章<small>(10)</small></div></li>
     
         
             
-            <li><div data-rel="JAVA">JAVA<small>(5)</small></div>
+            <li><div data-rel="JAVA">JAVA<small>(6)</small></div>
                 
             </li>
             
@@ -167,8 +169,8 @@
     </div>
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="9">
-<input type="hidden" id="yelog_site_word_count" value="18.2k">
+<input type="hidden" id="yelog_site_posts_number" value="10">
+<input type="hidden" id="yelog_site_word_count" value="22.6k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -252,6 +254,54 @@
             <span class="post-date" title="2020-09-23 10:48:03">2020/09/23</span>
         </a>
         
+        <a  class="全部文章 JAVA "
+           href="/2020/09/19/JVM_load/"
+           data-tag="JVM"
+           data-author="" >
+            <span class="post-title" title="JVM - 类加载">JVM - 类加载</span>
+            <span class="post-date" title="2020-09-19 15:57:32">2020/09/19</span>
+        </a>
+        
+        <a  class="全部文章 JAVA "
+           href="/2020/09/12/JVM_optimize/"
+           data-tag="JVM"
+           data-author="" >
+            <span class="post-title" title="JVM - JVM性能调优">JVM - JVM性能调优</span>
+            <span class="post-date" title="2020-09-12 10:25:11">2020/09/12</span>
+        </a>
+        
+        <a  class="全部文章 JAVA "
+           href="/2020/09/05/JVM_overflow/"
+           data-tag="JVM"
+           data-author="" >
+            <span class="post-title" title="JVM - JVM内存溢出">JVM - JVM内存溢出</span>
+            <span class="post-date" title="2020-09-05 16:33:45">2020/09/05</span>
+        </a>
+        
+        <a  class="全部文章 JAVA "
+           href="/2020/08/29/JVM_G1/"
+           data-tag="JVM"
+           data-author="" >
+            <span class="post-title" title="JVM - 垃圾回收算法-G1">JVM - 垃圾回收算法-G1</span>
+            <span class="post-date" title="2020-08-29 14:03:24">2020/08/29</span>
+        </a>
+        
+        <a  class="全部文章 JAVA "
+           href="/2020/08/22/JVM_collect/"
+           data-tag="JVM"
+           data-author="" >
+            <span class="post-title" title="JVM - 垃圾回收算法">JVM - 垃圾回收算法</span>
+            <span class="post-date" title="2020-08-22 17:03:24">2020/08/22</span>
+        </a>
+        
+        <a  class="全部文章 JAVA "
+           href="/2020/08/15/JVM_area/"
+           data-tag="JVM"
+           data-author="" >
+            <span class="post-title" title="JVM - JVM内存区域">JVM - JVM内存区域</span>
+            <span class="post-date" title="2020-08-15 13:47:19">2020/08/15</span>
+        </a>
+        
         <a  class="全部文章 设计模式 "
            href="/2019/11/11/dm3/"
            data-tag="行为型型模式"
@@ -276,48 +326,6 @@
             <span class="post-date" title="2019-10-26 13:28:56">2019/10/26</span>
         </a>
         
-        <a  class="全部文章 JAVA "
-           href="/2019/10/18/JVM5/"
-           data-tag="JVM"
-           data-author="" >
-            <span class="post-title" title="JVM（5）- 类加载">JVM（5）- 类加载</span>
-            <span class="post-date" title="2019-10-18 15:57:32">2019/10/18</span>
-        </a>
-        
-        <a  class="全部文章 JAVA "
-           href="/2019/10/15/JVM4/"
-           data-tag="JVM"
-           data-author="" >
-            <span class="post-title" title="JVM（4）- JVM性能调优">JVM（4）- JVM性能调优</span>
-            <span class="post-date" title="2019-10-15 10:25:11">2019/10/15</span>
-        </a>
-        
-        <a  class="全部文章 JAVA "
-           href="/2019/10/13/JVM3/"
-           data-tag="JVM"
-           data-author="" >
-            <span class="post-title" title="JVM（3）- JVM内存溢出">JVM（3）- JVM内存溢出</span>
-            <span class="post-date" title="2019-10-13 16:33:45">2019/10/13</span>
-        </a>
-        
-        <a  class="全部文章 JAVA "
-           href="/2019/10/10/JVM2/"
-           data-tag="JVM"
-           data-author="" >
-            <span class="post-title" title="JVM（2）- 垃圾回收算法">JVM（2）- 垃圾回收算法</span>
-            <span class="post-date" title="2019-10-10 17:03:24">2019/10/10</span>
-        </a>
-        
-        <a  class="全部文章 JAVA "
-           href="/2019/10/09/JVM1/"
-           data-tag="JVM"
-           data-author="" >
-            <span class="post-title" title="JVM（1）- JVM内存区域
-">JVM（1）- JVM内存区域
-</span>
-            <span class="post-date" title="2019-10-09 13:47:19">2019/10/09</span>
-        </a>
-        
         <div id="no-item-tips">
 
         </div>
@@ -335,9 +343,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-JVM2" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-JVM_collect" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">JVM（2）- 垃圾回收算法</h1>
+        <h1 class="article-title">JVM - 垃圾回收算法</h1>
     
     <div class="article-meta">
         
@@ -362,12 +370,12 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2020-09-25 15:17:00'>2019-10-10 17:03</time>
+            发布时间 : <time class="date" title='最后更新: 2020-09-28 15:28:14'>2020-08-22 17:03</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:2.6k</span>
+        <span>字数:2k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -397,7 +405,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#如何判断对象可以回收"><span class="toc-text">如何判断对象可以回收</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-引用计数法"><span class="toc-text">1.引用计数法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-可达性分析算法"><span class="toc-text">2.可达性分析算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-方法区回收"><span class="toc-text">3.方法区回收</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#垃圾回收算法"><span class="toc-text">垃圾回收算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#垃圾收集器"><span class="toc-text">垃圾收集器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#（1）Serial-收集器"><span class="toc-text">（1）Serial 收集器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（2）ParNew-收集器"><span class="toc-text">（2）ParNew 收集器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（3）Parallel-Scavenge-收集器"><span class="toc-text">（3）Parallel Scavenge 收集器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（4）Serial-Old收集器"><span class="toc-text">（4）Serial Old收集器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（5）CMS-Concurrent-Mark-Sweep-收集器"><span class="toc-text">（5）CMS(Concurrent Mark Sweep) 收集器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（6）Parallel-Old-收集器"><span class="toc-text">（6）Parallel Old 收集器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（7）G1-收集器"><span class="toc-text">（7）G1 收集器</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#如何判断对象可以回收"><span class="toc-text">如何判断对象可以回收</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-引用计数法"><span class="toc-text">1.引用计数法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-可达性分析算法"><span class="toc-text">2.可达性分析算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-方法区回收"><span class="toc-text">3.方法区回收</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#垃圾回收算法"><span class="toc-text">垃圾回收算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#垃圾收集器"><span class="toc-text">垃圾收集器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#（1）Serial-收集器"><span class="toc-text">（1）Serial 收集器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（2）ParNew-收集器"><span class="toc-text">（2）ParNew 收集器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（3）Parallel-Scavenge-收集器"><span class="toc-text">（3）Parallel Scavenge 收集器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（4）Serial-Old收集器"><span class="toc-text">（4）Serial Old收集器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（5）CMS-Concurrent-Mark-Sweep-收集器-JDK9中标记废弃，14中移除"><span class="toc-text">（5）CMS(Concurrent Mark Sweep) 收集器(JDK9中标记废弃，14中移除)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（6）Parallel-Old-收集器"><span class="toc-text">（6）Parallel Old 收集器</span></a></li></ol></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -414,9 +422,8 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="如何判断对象可以回收"><a href="#如何判断对象可以回收" class="headerlink" title="如何判断对象可以回收"></a>如何判断对象可以回收</h2><h3 id="1-引用计数法"><a href="#1-引用计数法" class="headerlink" title="1.引用计数法"></a>1.引用计数法</h3><p>给每一个对象添加一个引用计数器，每当有一个地方引用它时，计数器值加1；每当有一个地方不再引用它时，计数器值减1，这样只要计数器的值不为0，就说明还有地方引用它，它就不是无用的对象。</p>
-<p><strong>Tips:</strong></p>
-<p><strong>（1）当两个对象互相调用的时候，它们的引用计数都是1，都无法回收；</strong></p>
-<p><strong>（2）当前的主流虚拟机都没有采用</strong></p>
+<p><strong>不足:</strong></p>
+<p><strong>当两个对象互相调用的时候，它们的引用计数都是1，都无法回收；</strong></p>
 <a id="more"></a>
 
 <h3 id="2-可达性分析算法"><a href="#2-可达性分析算法" class="headerlink" title="2.可达性分析算法"></a>2.可达性分析算法</h3><p>当一个对象到GC Roots没有任何引用链相连（GC Roots到这个对象不可达）时，就说明此对象是不可用的，是死对象。</p>
@@ -434,23 +441,24 @@
 <li>该类对应的java.lang.Class对象在任何地方没有被引用（无法通过反射访问该类的方法）</li>
 </ul>
 <h2 id="垃圾回收算法"><a href="#垃圾回收算法" class="headerlink" title="垃圾回收算法"></a>垃圾回收算法</h2><p>（1）标记-清除算法：分为标记和清除两个阶段，首先标记出所有需要回收的对象，标记完成后统一回收所有被标记的对象，如下图。</p>
-<p>缺点：标记和清除两个过程效率都不高；标记清除之后会产生大量不连续的内存碎片。 </p>
-<p>（2）复制算法：把内存分为大小相等的两块，每次存储只用其中一块，当这一块用完了，就把存活的对象全部复制到另一块上，同时把使用过的这块内存空间全部清理掉，往复循环。</p>
+<p>缺点：标记和清除两个过程效率都不高；标记清除之后会产生大量不连续的内存碎片。（只有CMS垃圾收集器使用，因为这个致命缺陷，在JDK14已经被移除） </p>
+<p>（2）复制算法：把内存分为大小相等的两块，每次存储只用其中一块，当这一块用完了，就把存活的对象全部复制到另一块上，同时把使用过的这块内存空间全部清理掉，往复循环。新生代中基本上都是使用的这个算法。</p>
 <p>缺点：实际可使用的内存空间缩小为原来的一半，比较适合对象生存周期短的区域。</p>
 <p>（3）标记-整理算法：先对可用的对象进行标记，然后所有被标记的对象向一段移动，最后清除可用对象边界以外的内存。</p>
 <h3 id="垃圾收集器"><a href="#垃圾收集器" class="headerlink" title="垃圾收集器"></a>垃圾收集器</h3><p>新生代收集器：Serial、ParNew、Parallel Scavenge</p>
 <p>老年代收集器：Serial Old、CMS、Parallel Old</p>
 <p>堆内存垃圾收集器：G1 </p>
-<h4 id="（1）Serial-收集器"><a href="#（1）Serial-收集器" class="headerlink" title="（1）Serial 收集器"></a>（1）Serial 收集器</h4><p>​        Serial是一款用于新生代的单线程收集器，采用复制算法进行垃圾收集。Serial进行垃圾收集时，不仅只用一条线程执行垃圾收集工作，它在收集的同时，所有的用户线程必须暂停（Stop The World）。</p>
+<p>”新“垃圾收集器：ZGC(jdk11 )、Shenandoah（只有OpenJdk才有 从12开始出现）</p>
+<h4 id="（1）Serial-收集器"><a href="#（1）Serial-收集器" class="headerlink" title="（1）Serial 收集器"></a>（1）Serial 收集器</h4><p>​        Serial是一款用于新生代的单线程收集器，采用复制算法进行垃圾收集。它的“单线程”的意义并不仅仅说明它只会使用一个CPU或一条收集线程去完成垃圾收集工作，更重要的是在它进行垃圾收集时，必须暂停其他所有的工作线程，直到它收集结束（Stop The World ）。</p>
 <p><strong>适用场景</strong>：Client模式（桌面应用）；单核服务器。可以用-XX:+UserSerialGC来选择Serial作为新生代收集器。</p>
-<h4 id="（2）ParNew-收集器"><a href="#（2）ParNew-收集器" class="headerlink" title="（2）ParNew 收集器"></a>（2）ParNew 收集器</h4><p>​        ParNew就是一个Serial的多线程版本，其它与Serial并无区别。ParNew在单核CPU环境并不会比Serial收集器达到更好的效果，它默认开启的收集线程数和CPU数量一致，可以通过-XX:ParallelGCThreads来设置垃圾收集的线程数。 </p>
+<h4 id="（2）ParNew-收集器"><a href="#（2）ParNew-收集器" class="headerlink" title="（2）ParNew 收集器"></a>（2）ParNew 收集器</h4><p>​        ParNew是一个Serial的多线程版本，其它与Serial并无区别。ParNew在单核CPU环境并不会比Serial收集器达到更好的效果，它默认开启的收集线程数和CPU数量一致，可以通过-XX:ParallelGCThreads来设置垃圾收集的线程数。 </p>
 <p><strong>适用场景</strong>：多核服务器；与CMS收集器搭配使用。当使用-XX:+UserConcMarkSweepGC来选择CMS作为老年代收集器时，新生代收集器默认就是ParNew，也可以用-XX:+UseParNewGC来指定使用ParNew作为新生代收集器。</p>
 <h4 id="（3）Parallel-Scavenge-收集器"><a href="#（3）Parallel-Scavenge-收集器" class="headerlink" title="（3）Parallel Scavenge 收集器"></a>（3）Parallel Scavenge 收集器</h4><p>​        Parallel Scavenge是一款用于新生代的多线程收集器，与ParNew的不同之处是，ParNew的目标是尽可能缩短垃圾收集时用户线程的停顿时间，Parallel Scavenge的目标是达到一个可控制的吞吐量。</p>
 <p>​        可以通过-XX:MaxGCPauseMillis来设置收集器尽可能在多长时间内完成内存回收，可以通过-XX:GCTimeRatio来精确控制吞吐量。</p>
 <p><strong>适用场景</strong>：注重吞吐量，高效利用CPU，需要高效运算且不需要太多交互。可以使用-XX:+UseParallelGC来选择Parallel Scavenge作为新生代收集器，jdk7、jdk8默认使用Parallel Scavenge作为新生代收集器。</p>
 <h4 id="（4）Serial-Old收集器"><a href="#（4）Serial-Old收集器" class="headerlink" title="（4）Serial Old收集器"></a>（4）Serial Old收集器</h4><p>​        Serial Old收集器是Serial的老年代版本，同样是一个单线程收集器，采用标记-整理算法。</p>
 <p><strong>适用场景</strong>：Client模式（桌面应用）；单核服务器；与Parallel Scavenge收集器搭配；作为CMS收集器的后备预案。</p>
-<h4 id="（5）CMS-Concurrent-Mark-Sweep-收集器"><a href="#（5）CMS-Concurrent-Mark-Sweep-收集器" class="headerlink" title="（5）CMS(Concurrent Mark Sweep) 收集器"></a>（5）CMS(Concurrent Mark Sweep) 收集器</h4><p>​        CMS收集器是一种以最短回收停顿时间为目标的收集器，以“最短用户线程停顿时间”著称。整个垃圾收集过程分为4个步骤：</p>
+<h4 id="（5）CMS-Concurrent-Mark-Sweep-收集器-JDK9中标记废弃，14中移除"><a href="#（5）CMS-Concurrent-Mark-Sweep-收集器-JDK9中标记废弃，14中移除" class="headerlink" title="（5）CMS(Concurrent Mark Sweep) 收集器(JDK9中标记废弃，14中移除)"></a>（5）CMS(Concurrent Mark Sweep) 收集器(JDK9中标记废弃，14中移除)</h4><p>​        CMS收集器是一种以最短回收停顿时间为目标的收集器，以“最短用户线程停顿时间”著称。整个垃圾收集过程分为4个步骤：</p>
 <p> ① 初始标记：标记一下GC Roots能直接关联到的对象，速度较快</p>
 <p> ② 并发标记：进行GC Roots Tracing，标记出全部的垃圾对象，耗时较长 </p>
 <p> ③ 重新标记：修正并发标记阶段引用户程序继续运行而导致变化的对象的标记记录，耗时较短  </p>
@@ -464,16 +472,6 @@
 </ul>
 <h4 id="（6）Parallel-Old-收集器"><a href="#（6）Parallel-Old-收集器" class="headerlink" title="（6）Parallel Old 收集器"></a>（6）Parallel Old 收集器</h4><p>​        Parallel Old收集器是Parallel Scavenge的老年代版本，是一个多线程收集器，采用标记-整理算法。可以与Parallel Scavenge收集器搭配，可以充分利用多核CPU的计算能力。</p>
 <p> <strong>适用场景</strong>：与Parallel Scavenge收集器搭配使用；注重吞吐量。jdk7、jdk8默认使用该收集器作为老年代收集器，使用 -XX:+UseParallelOldGC来指定使用Paralle Old收集器。</p>
-<h4 id="（7）G1-收集器"><a href="#（7）G1-收集器" class="headerlink" title="（7）G1 收集器"></a>（7）G1 收集器</h4><p>​        G1 收集器是jdk1.7才正式引用的商用收集器，现在已经成为jdk9默认的收集器。前面几款收集器收集的范围都是新生代或者老年代，G1进行垃圾收集的范围是整个堆内存，它采用“化整为零”的思路，把整个堆内存划分为多个大小相等的独立区域（Region），在G1收集器中还保留着新生代和老年代的概念，它们分别都是一部分Region。</p>
-<p>​        每一个方块就是一个区域，每个区域可能是Eden、Survivor、老年代，每种区域的数量也不一定。JVM启动时会自动设置每个区域的大小（1M~32M，必须是2的次幂），最多可以设置2048个区域（即支持的最大堆内存为32M*2048=64G），假如设置-Xmx8g -Xms8g，则每个区域大小为8g/2048=4M。</p>
-<p>​        为了在GC Roots Tracing的时候避免扫描全堆，在每个Region中，都有一个Remembered Set来实时记录该区域内的引用类型数据与其他区域数据的引用关系（在前面的几款分代收集中，新生代、老年代中也有一个Remembered Set来实时记录与其他区域的引用关系），在标记时直接参考这些引用关系就可以知道这些对象是否应该被清除，而不用扫描全堆的数据。</p>
-<p>​        G1收集器可以“建立可预测的停顿时间模型”，它维护了一个列表用于记录每个Region回收的价值大小（回收后获得的空间大小以及回收所需时间的经验值），这样可以保证G1收集器在有限的时间内可以获得最大的回收效率。</p>
-<p><strong>G1收集步骤</strong>：</p>
-<p>① 初始标记：标记出GC Roots直接关联的对象，这个阶段速度较快，需要停止用户线程，单线程执行  </p>
-<p>② 并发标记：从GC Root开始对堆中的对象进行可达新分析，找出存活对象，这个阶段耗时较长，但可以和用户线程并发执行  </p>
-<p>③ 最终标记：修正在并发标记阶段引用户程序执行而产生变动的标记记录  </p>
-<p>④ 筛选回收：筛选回收阶段会对各个Region的回收价值和成本进行排序，根据用户所期望的GC停顿时间来指定回收计划（用最少的时间来回收包含垃圾最多的区域，这就是Garbage First的由来——第一时间清理垃圾最多的区块），这里为了提高回收效率，并没有采用和用户线程并发执行的方式，而是停顿用户线程。</p>
-<p><strong>适用场景</strong>：要求尽可能可控GC停顿时间；内存占用较大的应用。可以用-XX:+UseG1GC使用G1收集器，jdk9默认使用G1收集器。</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 prettysave@163.com </span>
