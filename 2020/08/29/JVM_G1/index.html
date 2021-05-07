@@ -2,21 +2,23 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>JVM - 垃圾回收算法-G1 | 嗯哼</title>
+  <title>JVM - 垃圾回收-G1 | 嗯哼</title>
   <meta name="keywords" content=" JVM ">
-  <meta name="description" content="JVM - 垃圾回收算法-G1 | 嗯哼">
+  <meta name="description" content="JVM - 垃圾回收-G1 | 嗯哼">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="## 页面未找到！">
+<meta name="description" content="关于我到目前为止已经写了篇文章， 共字。 本站访问人数：人次 ， 访问量：次 博客平台这个博客通过 Hexo 生成，部署在 GitHub Pages主题 3-hexo 已经在github上开源 3-hexo 主题使用交流可以加 Q群:">
 <meta property="og:type" content="website">
-<meta property="og:title" content="404">
-<meta property="og:url" content="http://yoursite.com/404.html">
+<meta property="og:title" content="天下大事 比作于细">
+<meta property="og:url" content="http://yoursite.com/about/index.html">
 <meta property="og:site_name" content="嗯哼">
-<meta property="og:description" content="## 页面未找到！">
+<meta property="og:description" content="关于我到目前为止已经写了篇文章， 共字。 本站访问人数：人次 ， 访问量：次 博客平台这个博客通过 Hexo 生成，部署在 GitHub Pages主题 3-hexo 已经在github上开源 3-hexo 主题使用交流可以加 Q群:">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-09-25T04:48:17.169Z">
+<meta property="og:image" content="http://pub.idqqimg.com/wpa/images/group.png">
+<meta property="og:updated_time" content="2020-09-25T07:29:01.315Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="404">
-<meta name="twitter:description" content="## 页面未找到！">
+<meta name="twitter:title" content="天下大事 比作于细">
+<meta name="twitter:description" content="关于我到目前为止已经写了篇文章， 共字。 本站访问人数：人次 ， 访问量：次 博客平台这个博客通过 Hexo 生成，部署在 GitHub Pages主题 3-hexo 已经在github上开源 3-hexo 主题使用交流可以加 Q群:">
+<meta name="twitter:image" content="http://pub.idqqimg.com/wpa/images/group.png">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -58,8 +60,10 @@
 <body>
 <aside class="nav">
     <div class="nav-left">
-        <a href="/" class="avatar_target">
-    <img class="avatar" src="/img/avatar.jpg" />
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.jpg"/>
 </a>
 <div class="author">
     <span>嗯哼</span>
@@ -70,13 +74,15 @@
         
     
         
-        <a title="github" href="https://github.com/prettysave" target="_blank">
-            
-                <svg class="iconfont-svg" aria-hidden="true">
-                    <use xlink:href="#icon-github"></use>
-                </svg>
-            
-        </a>
+            <a title="github"
+               href="https://github.com/prettysave"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
         
     
         
@@ -102,23 +108,27 @@
         
     
         
-        <a title="email" href="mailto:prettysave@163.com" target="_blank">
-            
-                <svg class="iconfont-svg" aria-hidden="true">
-                    <use xlink:href="#icon-email"></use>
-                </svg>
-            
-        </a>
+            <a title="email"
+               href="mailto:prettysave@163.com"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-email"></use>
+                    </svg>
+                
+            </a>
         
     
         
-        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=1642838275&site=qq&menu=yes" target="_blank">
-            
-                <svg class="iconfont-svg" aria-hidden="true">
-                    <use xlink:href="#icon-qq"></use>
-                </svg>
-            
-        </a>
+            <a title="qq"
+               href="http://wpa.qq.com/msgrd?v=3&uin=1642838275&site=qq&menu=yes"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-qq"></use>
+                    </svg>
+                
+            </a>
         
     
         
@@ -131,44 +141,92 @@
 
 
 <ul>
-    <li><div class="all active" data-rel="全部文章">全部文章<small>(11)</small></div></li>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(13)</small>
+            
+        </div>
+    </li>
     
         
             
-            <li><div data-rel="JAVA">JAVA<small>(6)</small></div>
-                
-            </li>
+                <li>
+                    <div data-rel="JAVA">
+                        
+                        JAVA
+                        <small>(6)</small>
+                        
+                    </div>
+                    
+                </li>
             
         
     
         
             
-            <li><div data-rel="数据库">数据库<small>(2)</small></div>
-                
-            </li>
+                <li>
+                    <div data-rel="数据库">
+                        
+                        数据库
+                        <small>(3)</small>
+                        
+                    </div>
+                    
+                </li>
             
         
     
         
             
-            <li><div data-rel="设计模式">设计模式<small>(3)</small></div>
-                
-            </li>
+                <li>
+                    <div data-rel="设计模式">
+                        
+                        设计模式
+                        <small>(3)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="踩坑记录">
+                        
+                        踩坑记录
+                        <small>(1)</small>
+                        
+                    </div>
+                    
+                </li>
             
         
     
 </ul>
 <div class="left-bottom">
     <div class="menus">
-    
-    
-    
-    
+        
+            
+            
+            
     </div>
-    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">关于</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">友链</a>
+        
+    </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="11">
-<input type="hidden" id="yelog_site_word_count" value="25.5k">
+<input type="hidden" id="yelog_site_posts_number" value="13">
+<input type="hidden" id="yelog_site_word_count" value="28.2k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -198,7 +256,7 @@
         </div>
         <div id="search-panel">
             <i class="iconfont icon-left" data-title="返回"></i>
-            <input id="local-search-input" />
+            <input id="local-search-input" autocomplete="off"/>
             <label class="border-line" for="input"></label>
             <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
             <i class="iconfont icon-tag" data-title="标签"></i>
@@ -222,7 +280,19 @@
             </li>
         
             <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>redis</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>spring</a>
+            </li>
+        
+            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>优化</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>分布式锁</a>
             </li>
         
             <li class="article-tag-list-item">
@@ -237,12 +307,32 @@
                 <i class="iconfont icon-tag"></i><a>行为型型模式</a>
             </li>
         
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>锁</a>
+            </li>
+        
     </div>
 
 </div>
 
     
     <nav id="title-list-nav">
+        
+        <a  class="全部文章 踩坑记录 "
+           href="/2021/03/12/debug-oom/"
+           data-tag="spring,redis,分布式锁"
+           data-author="" >
+            <span class="post-title" title="使用spring-integration-redis出现的内存泄漏">使用spring-integration-redis出现的内存泄漏</span>
+            <span class="post-date" title="2021-03-12 17:33:55">2021/03/12</span>
+        </a>
+        
+        <a  class="全部文章 数据库 "
+           href="/2020/11/25/mysql-for-update/"
+           data-tag="mysql,锁"
+           data-author="" >
+            <span class="post-title" title="SELECT ... FOR UPDATE">SELECT ... FOR UPDATE</span>
+            <span class="post-date" title="2020-11-25 17:10:20">2020/11/25</span>
+        </a>
         
         <a  class="全部文章 数据库 "
            href="/2020/09/28/mysql-overview/"
@@ -272,7 +362,7 @@
            href="/2020/09/12/JVM_optimize/"
            data-tag="JVM"
            data-author="" >
-            <span class="post-title" title="JVM - JVM性能调优">JVM - JVM性能调优</span>
+            <span class="post-title" title="JVM - 性能调优">JVM - 性能调优</span>
             <span class="post-date" title="2020-09-12 10:25:11">2020/09/12</span>
         </a>
         
@@ -280,7 +370,7 @@
            href="/2020/09/05/JVM_overflow/"
            data-tag="JVM"
            data-author="" >
-            <span class="post-title" title="JVM - JVM内存溢出">JVM - JVM内存溢出</span>
+            <span class="post-title" title="JVM - 内存溢出">JVM - 内存溢出</span>
             <span class="post-date" title="2020-09-05 16:33:45">2020/09/05</span>
         </a>
         
@@ -288,7 +378,7 @@
            href="/2020/08/29/JVM_G1/"
            data-tag="JVM"
            data-author="" >
-            <span class="post-title" title="JVM - 垃圾回收算法-G1">JVM - 垃圾回收算法-G1</span>
+            <span class="post-title" title="JVM - 垃圾回收-G1">JVM - 垃圾回收-G1</span>
             <span class="post-date" title="2020-08-29 14:03:24">2020/08/29</span>
         </a>
         
@@ -296,7 +386,7 @@
            href="/2020/08/22/JVM_collect/"
            data-tag="JVM"
            data-author="" >
-            <span class="post-title" title="JVM - 垃圾回收算法">JVM - 垃圾回收算法</span>
+            <span class="post-title" title="JVM - 垃圾回收">JVM - 垃圾回收</span>
             <span class="post-date" title="2020-08-22 17:03:24">2020/08/22</span>
         </a>
         
@@ -339,6 +429,7 @@
     <div id="outline-list">
     </div>
 </div>
+
     </div>
     <div class="hide-list">
         <div class="semicircle" data-title="切换全屏 快捷键 s">
@@ -351,7 +442,7 @@
     <div class="pjax">
         <article id="post-JVM_G1" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">JVM - 垃圾回收算法-G1</h1>
+        <h1 class="article-title">JVM - 垃圾回收-G1</h1>
     
     <div class="article-meta">
         
@@ -376,7 +467,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2020-09-28 15:28:04'>2020-08-29 14:03</time>
+            发布时间 : <time class="date" title='最后更新: 2021-05-06 19:11:10'>2020-08-29 14:03</time>
         
     </div>
     <div class="article-meta">
